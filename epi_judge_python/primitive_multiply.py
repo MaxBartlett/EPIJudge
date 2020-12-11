@@ -1,9 +1,18 @@
 from test_framework import generic_test
 
-
 def multiply(x: int, y: int) -> int:
-    # TODO - you fill in here.
-    return 0
+    def add(x: int, y: int) -> int:
+        while y:
+            carry = x & y
+            x = x ^ y
+            y = carry << 1
+        return x
+    result = 0
+    while x:
+        if x & 1:
+            result = add(result, y)
+        x, y = x >> 1, y << 1
+    return result
 
 
 if __name__ == '__main__':
