@@ -1,10 +1,16 @@
 from test_framework import generic_test
 
-
+# solution taken from stack overflow
 def closest_int_same_bit_count(x: int) -> int:
-    # TODO - you fill in here.
-    return 0
-
+    s = x & ~(x - 1)
+    ns = ~x & (x + 1)
+    if ns > s:
+        x |= ns
+        x ^= ns >> 1
+    else:
+        x ^= s
+        x |= s >> 1
+    return x
 
 if __name__ == '__main__':
     exit(
