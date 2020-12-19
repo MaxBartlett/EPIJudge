@@ -7,9 +7,34 @@ from test_framework.test_utils import enable_executor_hook
 
 RED, WHITE, BLUE = range(3)
 
+def bruteforce(pivot_index: int, A: List[int]) -> List[int]:
+    pivot = A[pivot_index]
+    L, E, G = [], [], []
+    for i in A:
+        if i == pivot:
+            E.append(i)
+        elif i < pivot:
+            L.append(i)
+        else:
+            G.append(i)
+    return L + E + G
+
+def optimal(pivot_index: int, A: List[int]) -> None:
+    pivot, s, e, l = A[pivot_index], 0, 0, len(A)
+    while e < l:
+        if A[e] < pivot:
+            A[s], A[e] = A[e], A[s]
+            s, e = s + 1, e + 1
+        elif A[e] > pivot:
+            l -= 1
+            A[e], A[l] = A[l], A[e]
+        else:
+            e += 1
+    return
+
 
 def dutch_flag_partition(pivot_index: int, A: List[int]) -> None:
-    # TODO - you fill in here.
+    optimal(pivot_index, A)
     return
 
 
