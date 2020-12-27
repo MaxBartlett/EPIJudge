@@ -2,8 +2,19 @@ from test_framework import generic_test
 
 
 def is_well_formed(s: str) -> bool:
-    # TODO - you fill in here.
-    return True
+    if not s:
+        return False
+    D = {'{' : '}',
+         '(' : ')',
+         '[' : ']'}
+    S = list()
+    
+    for i in range(len(s)):
+        if s[i] in D:
+            S.append(s[i])
+        elif not (S and D[S.pop()] == s[i]):
+            return False
+    return not S
 
 
 if __name__ == '__main__':
