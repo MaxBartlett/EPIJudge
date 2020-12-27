@@ -2,9 +2,18 @@ from test_framework import generic_test
 
 
 def evaluate(expression: str) -> int:
-    # TODO - you fill in here.
-    return 0
-
+    intermediate_results = []
+    DELIMETER = ','
+    OPERATORS = {'+': lambda y, x: x + y, '-': lambda y, x: x - y,
+                 '*': lambda y, x: x * y, '/': lambda y, x: int(x / y)
+                 }
+    for token in expression.split(DELIMETER):
+        if token in OPERATORS:
+            intermediate_results.append(OPERATORS[token](
+                intermediate_results.pop(), intermediate_results.pop()))
+        else:
+            intermediate_results.append(int(token))
+    return intermediate_results[-1]
 
 if __name__ == '__main__':
     exit(
